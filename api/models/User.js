@@ -5,6 +5,7 @@ const sequelize = require('../db')
 const User = sequelize.define('user',{
     id:{
         type:Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey:true,
         allowNull:false,
     },
@@ -34,7 +35,7 @@ const User = sequelize.define('user',{
         type:Sequelize.STRING,
         allowNull:false
     },
-    userPhoneNumber:{type:Sequelize.NUMBER,
+    userPhoneNumber:{type:Sequelize.STRING,
         allowNull:false}
 });
 
