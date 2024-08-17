@@ -1,0 +1,13 @@
+services:
+  node-app:
+    build: .
+    ports:
+      - "3001:3001"
+    
+
+  postgresdb:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=root123
+      - POSTGRES_USER=adi_node
+      - POSTGRES_DB=db123
