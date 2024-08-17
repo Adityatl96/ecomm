@@ -10,5 +10,5 @@ const sequelize = new Sequelize('db123', 'adi_node', 'root123', {
   },{
   timestamps: false
 });
-
+//
 module.exports = sequelize;
