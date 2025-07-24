@@ -1,57 +1,79 @@
+    import { useState } from "react";
 
-import {  useState } from "react";
-
-export default function signup(){
-    const [username, setUsername] = useState()
-    const [email, setmail] = useState()
-
-
-return(<>
-<div className="formContainer">
-<form onSubmit={handleSubmit}>
-
-
-<div className="usernamecontainer">
-    <label htmlFor="username">Username</label>
-    <input
-    type="text"
-    id="username"
-    value={username}
-    onChange={(e)=>{setUsername(e.value.target)}}
-    />
-</div>
-
-<div className="mailcontainer">
-        <label htmlFor="email">Email</label>
-    <input
-    type="email"
-    id="email"
-    value={email}
-    onChange={(e)=>{setmail(e.value.target)}}
-    />
-</div>
+    function SignupForm() {
+        const [formData, setFormData] = useState({
+            username:"",
+            password:"",
+            confirmPassword:"",
+            email:"",
+            consent:false
+        })
 
 
 
-<div className="Passwordcontainer"> 
-        <label htmlFor="password">Password</label>
-    <input
-    type="text"
-    id="password"
-    value={password}
-    onChange={(e)=>{setPassword(e.value.target)}}
-    />
-</div>
+const handleChange =(e) =>{
+ const {name, value,type,checked} = e.target
 
-
-
-</form>
-
-
-
-</div>
-
-
-
-</>)
+ setFormData((prev)=>(
+    {
+        ...prev,
+        [name]:type==='checkbox'?checked:value
+    }
+ ))
 }
+
+const handleSubmit = (e) =>{
+    e.preventDefault()
+    console.log('done', formData)
+}
+
+    return (
+        <form onSubmit={handleSubmit}>
+        {/* Username */}
+        <div>
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" name="username" value={formData.username} onChange={handleChange}/>
+        </div>
+
+    {/* mail */}
+
+        <div>
+            <label htmlFor="email">Email Address *</label>
+            <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            />
+        </div>
+        
+        {/* Password */}
+        <div>
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" name="password" value={formData.password} onChange={handleChange}/>
+        </div>
+
+        {/* Retype Password */}
+        <div>
+            <label htmlFor="confirmPassword">Retype Password</label>
+            <input id="confirmPassword" type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange}/>
+        </div>
+
+        
+
+        {/* Terms - Checkbox */}
+        <div>
+            <label>
+            <input type="checkbox" name="terms" checked={formData.consent} onChange={handleChange}/>
+            I agree to the Terms and Conditions
+            </label>
+        </div>
+
+        {/* Submit */}
+        <button type="submit">Sign Up</button>
+        </form>
+    );
+    }
+
+    export default SignupForm;
